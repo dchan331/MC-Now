@@ -5,16 +5,14 @@ const api = require('./routes');
 const axios = require('axios');
 const path = require('path');
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../build')));
 app.use('/api', api);
 
 app.get('/', (req, res) => {
-  var reactPath = path.join(__dirname,'../public/index.html');
+  var reactPath = path.join(__dirname, '../public/index.html');
   res.sendFile(reactPath);
 });
-
-
 
 app.listen(PORT, error => {
   error

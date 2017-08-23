@@ -2,9 +2,9 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  entry: __dirname + '/frontend/index.js',
+  entry: path.join(__dirname + '/frontend/index.js'),
   output: {
-    path: __dirname + '/build',
+    path: path.join(__dirname + '/build'),
     filename: 'app.bundle.js'
   },
   module: {
