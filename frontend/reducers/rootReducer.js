@@ -1,9 +1,14 @@
 
 import { combineReducers } from 'redux';
-import QuestionsAddReducer from './QuestionsAddReducer';
+import AnswerReducer from './AnswerReducer';
+import QuestionReducer from './QuestionReducer';
+import { reducer as formReducer } from 'redux-form'
+
 
 const rootReducer = combineReducers({
-  add: QuestionsAddReducer,
+  answer: AnswerReducer,
+  question: QuestionReducer,
+  form: formReducer
 });
 
 export default rootReducer;

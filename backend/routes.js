@@ -4,7 +4,8 @@ const _ = require('underscore');
 const bodyParser = require('body-parser');
 var fs = require('fs');
 router.use(bodyParser.urlencoded({ extended: true }))
-
+router.use(bodyParser.json());
+const Questions = require('./models/Questions');
 
 // mongoose configuration
 const mongoose = require('mongoose');
@@ -25,7 +26,26 @@ mongoose.connection.on('error', function() {
 mongoose.connect(process.env.MONGODB_URI);
 
 // YOUR API ROUTES HERE
-router.get('/', (req, res) => {
+router.get('/addQuestion', (req, res) => {
   res.send('Hello World')
 });
+
+router.post('/addQuestion', (req, res) => {
+  console.log('************', req.body)
+  const question = new Questions({
+    Question: req.body.question,
+    Answer: req.body.answer
+  })
+
+  question.save(err => {
+    if(err){
+      console.log(err)
+    }else{
+      console.log('successfully added');
+    };  
+  })
+
+  res.send('success')
+});
+
 module.exports = router;

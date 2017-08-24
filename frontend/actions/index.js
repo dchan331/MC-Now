@@ -1,10 +1,23 @@
-function handleAdd(tag, answer) {
+function handleAddAns(answer) {
     return {
-        type: 'NEW_ENTRY',
-        tag,
+        type: 'NEW_ANS',
         answer
     };
 }
 
+function handleAddQs(question, answer) {
+    return {
+        type: 'NEW_QS',
+        question,
+        answer
+    };
+}
 
-export {handleAdd};
+function refreshAns(){
+  return {
+    type: 'REFRESH'
+  }
+}
+
+
+export {handleAddAns, handleAddQs, refreshAns};
