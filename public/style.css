@@ -47,9 +47,52 @@
 }
 
 .answerItem {
-  font-Size: 15px;
+  font-Size: 21px;
+}
+
+.answerItem:hover {
+  background-color: cyan;
+}
+
+.answerItemClicked {
+  background-color: #82CFFD;
+  font-Size: 21px;
+}
+
+.answerItemClicked:hover {
+  background-color: #00FFFF;
+  font-Size: 21px;
 }
 
 .questionItem {
   font-Size: 25px;
+}
+
+#button-status {
+  background-color: #FF585B;
+  margin-top: 30vh;
+  font-size: 40px;
+  height: 10vh;
+  padding: 20px, 20px, 20px, 20px;
+}
+
+.SAFlex {
+  display: flex;
+  justify-content: center;
+  width: 60vw;
+  margin-left: 20vw;
+}
+
+.questionTab {
+  background-color: #FF585B;
+  color: white;
+}
+
+#submitAnswers{
+  background-color: #26a69a;
+  width: 100%
+}
+
+#submitAnswers:hover{
+  background-color: #2581a6;
 }

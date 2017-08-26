@@ -19,5 +19,23 @@ function refreshAns(){
   }
 }
 
+function studentAns(id, answer){
+  return {
+    type: 'STUDENT_ANS',
+    id,
+    answer
+  }
+}
 
-export {handleAddAns, handleAddQs, refreshAns};
+function studentQ(id, answer){
+  return {
+    type: 'STUDENT_QS',
+    id,
+    answer
+  }
+}
+
+
+
+
+export {handleAddAns, handleAddQs, refreshAns, studentAns, studentQ};

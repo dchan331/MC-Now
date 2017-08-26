@@ -42,10 +42,54 @@ router.post('/addQuestion', (req, res) => {
       console.log(err)
     }else{
       console.log('successfully added');
-    };  
+    };
   })
 
   res.send('success')
 });
+
+router.get('/answerQuestion', (req, res) => {
+  Questions.find({})
+    .then(resp => {
+      res.send(resp)
+    })
+});
+
+router.post('/answerquestion', (req, res) => {
+  const keys = Object.keys(req.body).filter(item => (item !== "count"))
+  keys.forEach(key => {
+    Questions.findOne({_id: key})
+    .then(resp => {
+      return matchingAns(resp, req.body[key])
+    })
+    .then(resp2 => {
+      Questions.findOneAndUpdate({_id: key},{Feedback: resp2})
+      .catch(err => {
+      })
+    })
+    .then(
+      res.send('correct answers response')
+    )
+    .catch(err => {
+      console.log('error' , err);
+    })
+  })
+});
+
+
+function matchingAns(resp, answers){
+  const feedback = resp.Feedback || {};
+  answers.answer.forEach(ans => {
+    if(feedback.hasOwnProperty(ans.val) && ans.chosen){
+      console.log('in here');
+      feedback[ans.val] += 1
+    }else if(!feedback.hasOwnProperty(ans.val) && ans.chosen){
+      feedback[ans.val] = 1
+    }else if(!feedback.hasOwnProperty(ans.val) && !ans.chosen){
+      feedback[ans.val] = 0
+    }
+  })
+  return feedback
+}
 
 module.exports = router;

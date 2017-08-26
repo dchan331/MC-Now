@@ -19,7 +19,7 @@ var QuestionSchema = new Schema({
     required: false
   },
   Feedback:{
-    type: Array,
+    type: Object,
     required: false
   }
 });

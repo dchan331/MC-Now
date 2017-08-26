@@ -1,15 +1,26 @@
+// dependencies
 import React from 'react';
 import axios from 'axios';
+const url = 'http://localhost:3000'
+
+//redux store
 import { connect } from 'react-redux';
-import { Input, Button, Card, Row, Col } from 'react-materialize';
-import { handleAddAns, handleAddQs, refreshAns } from '../actions/index';
-import type { FieldProps, FormProps } from 'redux-form'
+
+//materialize libraries
+import { Button } from 'react-materialize';
+import type { FieldProps, FormProps } from 'redux-form';
+
+// actions
+import { handleAddAns, handleAddQs, refreshAns } from '../../actions/index';
+
 import PropTypes from 'prop-types';
+
+//components
 import QuestionList from './QuestionList';
 import AnswerList from './AnswerList';
-import QuestionForm from './form/QuestionForm';
-import AnswerForm from './form/AnswerForm';
-const url = 'http://localhost:3000'
+import QuestionForm from './QuestionForm';
+import AnswerForm from './AnswerForm';
+
 
 class QuestionsAdd extends React.Component{
   constructor(props){
@@ -19,32 +30,29 @@ class QuestionsAdd extends React.Component{
   }
 
   Qsubmit(values){
-    console.log('values', values)
-    console.log('ans', this.props.addAns);
-    console.log('qs', this.props.addQs);
-    axios.post(url+'/api/addQuestion',{
-      "question": values.question,
-      "answer": this.props.addAns,
-    })
-    .then(resp => {
-      console.log('response', resp);
-      this.props.onAddQs(values.question,this.props.addAns);
-      this.props.onRefresh();
-    })
-    .catch(err => {
-      console.log('error', err);
-    })
-
+    if(this.props.addAns.length >=2 && values.question){
+      axios.post(url+'/api/addQuestion',{
+        "question": values.question,
+        "answer": this.props.addAns,
+      })
+      .then(resp => {
+        console.log('response', resp);
+        this.props.onAddQs(values.question,this.props.addAns);
+        this.props.onRefresh();
+      })
+      .catch(err => {
+        console.log('error', err);
+      })
+    }else{
+      alert('Missing Answer Option or Question')
+    }
   }
 
   Asubmit(values){
-    console.log('values A', values.answer)
     this.props.onAddAns(values.answer);
   }
 
   render(){
-    console.log('props', this.props.addAns.length);
-
     return(
       <div>
         <QuestionList addQs={this.props.addQs}/>
@@ -60,7 +68,6 @@ class QuestionsAdd extends React.Component{
 };
 
 QuestionsAdd.propTypes = {
-  tag: PropTypes.string,
   onAddAns: PropTypes.func,
   onAddQs: PropTypes.func,
   onRefresh: PropTypes.func,
