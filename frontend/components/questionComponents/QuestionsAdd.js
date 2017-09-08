@@ -25,27 +25,7 @@ import AnswerForm from './AnswerForm';
 class QuestionsAdd extends React.Component{
   constructor(props){
     super(props);
-    this.Qsubmit = this.Qsubmit.bind(this);
-    this.Asubmit = this.Asubmit.bind(this)
-  }
-
-  Qsubmit(values){
-    if(this.props.addAns.length >=2 && values.question){
-      axios.post(url+'/api/addQuestion',{
-        "question": values.question,
-        "answer": this.props.addAns,
-      })
-      .then(resp => {
-        console.log('response', resp);
-        this.props.onAddQs(values.question,this.props.addAns);
-        this.props.onRefresh();
-      })
-      .catch(err => {
-        console.log('error', err);
-      })
-    }else{
-      alert('Missing Answer Option or Question')
-    }
+    this.Asubmit = this.Asubmit.bind(this);
   }
 
   Asubmit(values){
@@ -57,7 +37,7 @@ class QuestionsAdd extends React.Component{
       <div>
         <QuestionList addQs={this.props.addQs}/>
 
-        <QuestionForm onSubmit={this.Qsubmit} />
+        <QuestionForm addAns={this.props.addAns} onSubmit={this.Qsubmit} />
 
         <AnswerList addAns={this.props.addAns}/>
 

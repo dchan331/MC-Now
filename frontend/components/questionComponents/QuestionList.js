@@ -1,6 +1,9 @@
 import React from 'react';
 
 class QuestionList extends React.Component{
+  componentWillReceiveProps(props){
+    console.log('props in QL', props);
+  }
 
   render() {
     const array = [];

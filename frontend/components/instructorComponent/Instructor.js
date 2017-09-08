@@ -6,7 +6,8 @@ class Instructor extends React.Component{
   render(){
     return(
       <div className="AddFlex">
-        Instructor
+        <Link to='/instructor/question'><Button>Add Questions for the day</Button></Link>
+        <Link to='/instructor/result'><Button>Check Results</Button></Link>
       </div>
     )
   }
